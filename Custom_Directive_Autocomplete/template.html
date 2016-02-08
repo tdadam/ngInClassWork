@@ -1,0 +1,7 @@
+<div class="autocomplete">
+    <input type="text" placeholder="Type your keyword here" ng-model="searchParam"/>
+    <ul ng-show="searchParam.length > 1">
+        <li ng-repeat="suggestion in tc.suggestions"
+            ng-bind="suggestion"></li>
+    </ul>
+</div>

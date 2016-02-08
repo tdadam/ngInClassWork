@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="form">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<form ng-init="nameEntered=0">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" ng-model="yourName" id="name" ng-blur="nameEntered=nameEntered+1"> <br>
+        <label for="dateOfBirth">DOB</label>
+        <input type="date" id="dateOfBirth"> <br>
+        <input type="radio" id="male" value="male" name="gender">
+        <label for="male">Male</label>
+        <input type="radio" id="female" value="female" name="gender">
+        <label for="female">Female</label><br>
+    </div>
+
+    <div ng-hide="nameEntered==0">
+        <p>Is {{yourName}} your full legal name?</p>
+        <input type="radio" id="legalYes" value="Yes" name="legal" ng-model="fullName">
+        <label for="legalYes">Yes</label>
+        <input type="radio" id="legalNo" value="No" name="legal" ng-model="fullName">
+        <label for="legalNo">No</label><br>
+    </div>
+
+    <div ng-show="fullName=='No'">
+        <p>What is your full legal name?</p>
+        <input type="text" ng-show="fullName=='No'">
+    </div>
+
+    <div>
+        <p>Do you have any children?</p>
+        <input type="radio" id="childYes" value="Yes" name="childQ" ng-model="hasChild">
+        <label for="legalYes">Yes</label>
+        <input type="radio" id="childNo" value="No" name="childQ" ng-model="hasChild">
+        <label for="legalNo">No</label><br>
+    </div>
+
+    <div ng-show="hasChild=='Yes'" ng-controller="ChildController as kid">
+        <div>
+            Name:
+            <input type="text" ng-model="kid.kidName"> <br>
+            Birthday:
+            <input type="date" ng-model="kid.kidDate">
+        </div>
+        <button ng-click="kid.setKid">Click to add a child</button>
+
+
+        <br>
+        Please select your favorite child:
+        <select>
+            <option>--Choose--</option>
+            <option ng-repeat="child in kid.children" ng-bind="child.name"></option>
+            <option>All</option>
+        </select>
+        <ul ng-repeat="child in kid.children">{{child.name}} | {{child.bdate | date:shortDate}}</ul>
+
+    </div>
+
+
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

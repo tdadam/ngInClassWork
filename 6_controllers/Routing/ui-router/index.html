@@ -1,0 +1,31 @@
+<html ng-app="myRoutingApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script>
+        angular.module('myRoutingApp', ['ui.router'])
+                .config(function($stateProvider){
+                    $stateProvider
+                            .state('route1', {templateUrl:'./route1.html'})
+                            .state('route2', {template:'Route 2 text <br>bc.route2Var={{bc.route2Var}}', controller:'MyController', controllerAs:'bc', resolve:{
+                                route2Var:function($timeout) {
+                                    return $timeout(function() {
+                                        return 'something';
+                                    }, 2000);
+                                }
+                            }});
+                })
+                .controller('MyController', function(route2Var){
+                    var bc = this;
+
+                        bc.route2Var = route2Var;
+
+                });
+    </script>
+</head>
+<body>
+<a ui-sref="route1">Route 1</a>
+<a ui-sref="route2">Route 2</a>
+<div ui-view></div>
+</body>
+</html>

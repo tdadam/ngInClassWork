@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        angular.module('feature1', []);
+        angular.module('feature2', []);
+        angular.module('features', ['feature1', 'feature2']);
+        angular.module('myDirective', []);
+        angular.module('myApp', ['features', 'myDirective']);
+    </script>
+
+</head>
+<body>
+</body>
+</html>

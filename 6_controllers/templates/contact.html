@@ -1,0 +1,23 @@
+<div class="alert alert-danger">
+    <h3>Contact</h3>
+    <label for="nameEntry">Enter Name: </label>
+    <input id="nameEntry" type="text" ng-model="cc.newName"><br>
+    <label for="addyEntry">Enter Address: </label>
+    <input id="addyEntry" type="text" ng-model="cc.newAddy"><br>
+    <label for="phoneEntry">Enter Phone: </label>
+    <input id="phoneEntry" type="tel" ng-model="cc.newPhone"><br>
+    <label for="emailEntry">Enter E-mail: </label>
+    <input id="emailEntry" type="email" ng-model="cc.newEmail"><br>
+
+    <hr>
+
+    <p>Validate information below</p>
+    <p>Name: <span ng-bind="cc.newName"></span></p>
+    <p>Address: <span ng-bind="cc.newAddy"></span></p>
+    <p>Phone: <span ng-bind="cc.newPhone"></span></p>
+    <p>Email: <span ng-bind="cc.newEmail"></span></p>
+<hr>
+
+    <button ng-click="cc.doSubmit()">Submit</button>
+
+</div>

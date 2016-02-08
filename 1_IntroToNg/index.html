@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>First AngularJS Project</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+<div>
+    <label>Name:</label>
+    <input type="text" ng-model="yourName" placeholder="Enter a name here">
+    <hr>
+    <h1>Hello {{yourName}}!</h1> <!--This is not always the best way, {{}} can load before page is complete-->
+    <h1>Hello <span ng-bind="yourName"></span>!</h1>
+    <select ng-model="yourName">
+        <option value="1">My Name</option><!--Better to use ng-options rather than adding each individual line-->
+        <option value="2">Your Name</option>
+    </select>
+
+    <!--Checkbox example covered: https://docs.angularjs.org/api/ng/input/input%5Bcheckbox%5D-->
+
+    <!--Radio example covered: https://docs.angularjs.org/api/ng/input/input%5Bradio%5D-->
+
+</div>
+</body>
+</html>

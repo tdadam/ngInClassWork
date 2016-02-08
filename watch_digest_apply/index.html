@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="watch-example">
+<head>
+    <meta charset="UTF-8">
+    <title>$watch example</title>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+
+    <script>
+        angular.module('watch-example',[])
+                .controller('watchController', function($scope, $timeout) {
+                    $scope.name = 'MATC';
+                    $scope.counter = 0;
+
+                    $scope.$watch('name', function(newValue, oldValue){
+                       if (newValue !== oldValue){
+                           $scope.counter++;
+                       }
+                    });
+
+                    setTimeout(function() {
+                        $scope.$apply(function(){$scope.name += ' Rocks!'});
+                    }, 1000);
+                    $timeout(function() {
+                        $scope.name += ' still';
+                    }, 250)
+                });
+    </script>
+</head>
+<body ng-controller="watchController">
+    <input type="text" ng-model="name">
+    <br>
+    <span>Change count: <span ng-bind="counter"></span></span>
+</body>
+</html>

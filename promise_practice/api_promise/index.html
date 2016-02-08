@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script>
+        angular.module('app', []).controller('Controller', function($http){
+            var vm = this;
+
+            vm.s = '';
+
+            vm.submit = function (){
+                console.log(vm.s);
+                var promise = $http.get('http://www.omdbapi.com/?t=' + vm.s);
+                promise.then(function(response) {
+                    vm.movies = response.data;
+                });
+            };
+        });
+//        , config).then(successCallback, errorCallback)
+    </script>
+</head>
+<body ng-controller="Controller as vm">
+
+<div class="container">
+    <input type="text" ng-model="vm.s">
+    <button class="btn btn-primary" ng-click="vm.submit()">Submit Search</button>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Runtime</th>
+            <th>Poster</th>
+        </tr>
+        <tr ng-repeat="movie in vm.movies">
+            <td>{{movie.Title}}</td>
+            <td>{{movie.Year}}</td>
+            <td>{{movie.Runtime}}</td>
+            <td><img src="{{movie.Poster}}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

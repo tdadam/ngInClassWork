@@ -1,0 +1,19 @@
+<html ng-app="myRoutingApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script>
+        angular.module('myRoutingApp', ['ngRoute'])
+                .config(function($routeProvider){
+                    $routeProvider
+                            .when('/route1', {templateUrl:'./route1.html'})
+                            .when('/route2', {template:'Route 2 text'});
+                });
+    </script>
+</head>
+<body>
+<a href="#/route1">Route 1</a>
+<a href="#/route2">Route 2</a>
+<div ng-view></div>
+</body>
+</html>

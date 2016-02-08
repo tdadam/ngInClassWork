@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="basicApp">
+<head>
+    <title>Scope Angular App</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>$scope</h2>
+
+    <div class="alert alert-info">
+        <input type="text" ng-model="sometext" />
+        <h4>sometext: {{ sometext }}</h4>
+        <button ng-click="doSomething()">Do It!</button>
+    </div>
+
+    <div ng-controller="basicController" class="alert alert-info">
+        <h3>basicController</h3>
+        <input type="text" ng-model="sometext" />
+        <h4>sometext: {{ sometext }}</h4>
+        <button ng-click="doSomething()">Do It!</button>
+    </div>
+
+    <div ng-controller="basicController" class="alert alert-info">
+        <h3>basicController</h3>
+        <input type="text" ng-model="sometext" />
+        <h4>sometext: {{ sometext }}</h4>
+        <button ng-click="doSomething()">Do It!</button>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+
+<script type="text/javascript" src="controller.js"></script>
+
+</body>
+</html>

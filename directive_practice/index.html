@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="isolate-scope">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Custom Directive Exercise: Isolate Scope</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <span class="navbar-brand">Custom Directive Exercise: Autocomplete</span>
+        </div>
+    </div>
+</nav>
+<div class="container" style="margin-top: 100px;" ng-controller="IsolatedScopeController">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+            <span class="text-center">Customer name:</span>
+            <input type="text" ng-model="name">
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+            <customer-name names="name" action="clickMe"></customer-name>
+            <!--<customer-name name="name" action="clickMe(message)"></customer-name>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

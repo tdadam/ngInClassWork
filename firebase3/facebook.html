@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.js"></script>
+    <script src="//cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+
+    <script>
+        var app = angular.module('app', ['ngStorage']);
+
+        app.config(['$localStorageProvider',
+            function ($localStorageProvider) {
+                $localStorageProvider.setKeyPrefix('');
+            }]);
+        app.controller('MainController', MainController);
+        MainController.$inject = ['$timeout', '$localStorage'];
+        function MainController($timeout, $localStorage) {
+            // controller data and functions
+            var vm = this;
+            vm.facebookLogin = facebookLogin;
+            vm.deleteFacebookData = deleteFacebookData;
+
+            vm.fbData = $localStorage['firebase:session::burning-torch-7958'];
+            // if facebook data is found in local storage, use it
+            vm.message = vm.fbData && vm.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
+
+            // IMPORTANT: change to match the URL of your Firebase.
+            var url = 'https://burning-torch-7958.firebaseio.com';
+            var ref = new Firebase(url);
+
+            // use Firebase library to login to facebook
+            function facebookLogin() {
+
+                ref.authWithOAuthPopup('facebook', function (error, authData) {
+                    if (error) {
+                        console.log('Log in to Facebook Failed', error);
+                        vm.message = 'Log in to Facebook Failed. ' + error;
+                    } else {
+                        console.log('Logged in to Facebook');
+                        vm.message = 'Logged in to Facebook.';
+                        $timeout(function() { // invokes $scope.$apply()
+                            vm.fbData = authData;
+                        });
+                    }
+                });
+            }
+            // this removes facebook data from local storage
+            // to FULLY logout, you MUST go to facebook.com and logout
+            function deleteFacebookData() {
+                $localStorage.$reset();
+                vm.fbData = {};
+                vm.message = 'Facebook data deleted.'
+            }
+            // bug alert: this delete function sometimes does NOT reset the local storage,
+            // so a page refresh finds facebook data in localstorage.
+        }
+    </script>
+</head>
+<body ng-app="app">
+
+<div ng-controller="MainController as vm">
+
+    <button ng-click="vm.facebookLogin()">Log in with Facebook</button>
+    <button ng-click="vm.deleteFacebookData()">Delete data</button>
+    <a href='https://www.facebook.com/'>Go to Facebook</a><br />
+    <br />
+    <div>{{ vm.message }}</div>
+    <br />
+
+    <!-- click profile pic to display raw data from facebook -->
+    <div>{{ vm.fbData.facebook.displayName }}</div>
+    <div ng-click="vm.showData=!vm.showData">
+        <img ng-show="vm.fbData.facebook.profileImageURL" ng-src="{{ vm.fbData.facebook.profileImageURL }}">
+    </div>
+    <pre ng-show="vm.showData" ng-bind="vm.fbData.facebook | json"></pre>
+
+</div>
+
+</body>
+</html>

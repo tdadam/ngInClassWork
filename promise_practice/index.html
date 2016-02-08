@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script>
+        angular.module('app', []).controller('Controller', function($q){
+            var vm = this;
+            var index = 1;
+            vm.progress = "60%";
+            vm.clickMe = function (){
+                vm.progress = '0%';
+                console.log(index + ". Hello!");
+                var promise = vm.deferred();
+                promise.then(function(){
+                    console.log("success");
+                }, function() {
+                    console.log("failure");
+                }, function(update) {
+                    vm.progress = update;
+                });
+                console.log(index + ". Goodbye!");
+                index++;
+            };
+            vm.deferred = function() {
+                var all = [];
+
+                for (var i = 1; i<6; i++) {
+                    var deferred = $q.defer();
+                    all.push(deferred);
+                    setTimeout(function () {
+                        deferred.notify((i * 20) + "%");
+                    }, 1000 * i);
+                }
+
+//                setTimeout(function() {
+//                    deferred.notify("0%");
+//                    setTimeout(function() {
+//                        deferred.notify("100%");
+//                        deferred.resolve("I'm done!!");
+//                    }, 1000);
+//                }, 1000);
+//
+//                return deferred.promise;
+                return $q.all(all);
+            };
+        })
+    </script>
+</head>
+<body ng-controller="Controller as vm">
+
+<div class="container">
+    <button class="btn btn-primary" ng-click="vm.clickMe()">Click Me!!!</button>
+</div>
+<br>
+<div class="progress">
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="min-width: 2em; width: {{vm.progress}}">
+        {{vm.progress}}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title>More Directives</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+</head>
+<body>
+
+<br />
+<div class="container">
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <h1>More Directives</h1>
+        </div>
+
+        <div class="panel-body">
+
+            <h3>ngClick</h3>
+            <button ng-click="count1=count1+1" ng-init="count1=0">
+                Click Me
+            </button>
+            <br />
+            count: {{ count1 }}
+
+
+            <h3>ngMouse*</h3>
+            <button ng-mouseenter="count2=count2+1"
+                    ng-mouseleave="count2=count2-1"
+                    ng-mousedown="count2=count2+10"
+                    ng-mouseup="count2=count2-10"
+                    ng-init="count2=0">
+                Mouse Tricks
+            </button>
+            <br />
+            count: {{ count2 }}
+
+
+            <h3>ngKeyPress</h3>
+            <input ng-keypress="count3=count3+1" ng-model="value3">
+            <br />
+            count: {{ count3 }}
+
+
+            <h3>ngKeydown, ngKeyup</h3>
+            <input ng-keydown="value4=$event.keyCode" ng-keyup="value4=''">
+            <br />
+            value: {{ value4 }}
+
+
+            <h3>ngChange</h3>
+            <input ng-change="count5=value5.length" ng-model="value5">
+            <br />
+            value: {{ value5 }}
+            <br />
+            count: {{ count5 }}
+
+
+            <h3>ngFocus, ngBlur</h3>
+            <input ng-focus="value6='focus'" ng-blur="value6=''" ng-model="value6">
+            <br />
+            value: {{ value6 }}
+
+
+            <h3>ngHref</h3>
+            <input ng-model="value7" ng-init="value7='ngHref'">
+            <br />
+            <a ng-href="//code.angularjs.org/1.4.7/docs/api/ng/directive/{{ value7 }}" target="_blank">{{ value7 }} Docs</a>
+
+
+            <h3>ngSrc</h3>
+            Icon name:
+            <input ng-model="value8" ng-init="value8='search'">
+            <br />
+            Icon color:
+            <input type="radio" ng-model="color8" value="black" id="black" ng-init="color8='black'">
+            <label for="black">Black</label>
+            <input type="radio" ng-model="color8" value="white" id="white">
+            <label for="white">White</label>
+            <br />
+            <div class="col-sm-1 text-center" style="background-color:lightgray">
+                <img ng-src="//storage.googleapis.com/material-icons/external-assets/v2/icons/svg/ic_{{ value8 }}_{{ color8 }}_48px.svg">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+
+</body>
+</html>
