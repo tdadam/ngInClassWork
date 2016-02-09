@@ -1,0 +1,20 @@
+h3 {
+    margin-top: 0;
+}
+h4 {
+    margin-top: 6px !important;
+}
+.top-margin {
+    margin-top: 50px;
+}
+input[type=text], button {
+    border: black 1px solid;
+}
+.drop-here {
+    padding: 20px;
+    border: 2px solid royalblue;
+    cursor: copy;
+}
+.text-anchor {
+    text-decoration: underline;
+}

@@ -1,0 +1,37 @@
+<div class="alert alert-success">
+
+    <!-- upload box -->
+    <div ngf-drop ngf-select
+         class="drop-box ng-valid ng-dirty"
+         ng-model="files"
+         ng-model-rejected="rejFiles"
+         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+         ngf-multiple="true"
+         ngf-allow-dir="true"
+         ngf-accept="'image/*'"
+         ngf-change="hc.upload(files, $event, rejFiles, anotherCustomParam)"
+         ngf-drop-available="dropAvailable">
+        <div ngf-no-file-drop class="ng-hide">File Drop not available</div>
+        <h3 ng-show="dropAvailable" class="drop-here">
+            Drag files here to upload or <a href="#" class="btn btn-lg btn-primary">browse for a file</a>
+        </h3>
+    </div>
+    <br />
+
+    <!-- display file info -->
+    <div ng-repeat="file in files" class="file upload-file clearfix">
+        <h3 class="file-title {{ file.type }}">{{ file.name }}</h3>
+        <span class="file-size">({{ file.size / 1000 | number: 0 }}kb)</span>
+        <div ng-show="!file.complete" class="progress-bar">
+            <span class="meter" style="width: {{ file.progress }}%;"></span>
+        </div>
+        <span class="status status-done" ng-show="file.complete">Done</span>
+        <span class="status status-error" ng-show="file.error">Error</span>
+        <span ng-switch on="globals.currentUser.isAdmin">
+            <p class="file-description edit-area" ng-switch-when="true" editable-text="document.CaptionText"
+               onaftersave="saveDocument(document)">{{ document.CaptionText }}</p>
+            <p class="file-description" ng-switch-default>{{ document.CaptionText }}</p>
+        </span>
+    </div>
+
+</div>
