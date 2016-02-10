@@ -10,7 +10,9 @@
          ngf-allow-dir="true"
          ngf-accept="'image/*'"
          ngf-change="hc.upload(files, $event, rejFiles, anotherCustomParam)"
-         ngf-drop-available="dropAvailable">
+         ngf-drop-available="dropAvailable"
+    ngf-validate="{size: {max: '20MB', min: '10B'}, height: {max: 12000}, width: {max: 12000}, duration: {max: '5m'}}"
+    >
         <div ngf-no-file-drop class="ng-hide">File Drop not available</div>
         <h3 ng-show="dropAvailable" class="drop-here">
             Drag files here to upload or <a href="#" class="btn btn-lg btn-primary">browse for a file</a>
